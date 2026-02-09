@@ -1,3 +1,3 @@
-from .server import mcp
+from .app import fetch, get_config_info, search
 
-__all__ = ["mcp"]
+__all__ = ["fetch", "get_config_info", "search"]

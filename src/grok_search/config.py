@@ -5,10 +5,7 @@ from pathlib import Path
 class Config:
     _instance = None
     _SETUP_COMMAND = (
-        'claude mcp add-json grok-search --scope user '
-        '\'{"type":"stdio","command":"uvx","args":["--from",'
-        '"git+https://github.com/GuDaStudio/GrokSearch","grok-search"],'
-        '"env":{"GROK_API_URL":"your-api-url","GROK_API_KEY":"your-api-key"}}\''
+        "export GROK_API_URL=\"your-api-url\" && export GROK_API_KEY=\"your-api-key\""
     )
     _DEFAULT_MODEL = "grok-4-fast"
 
@@ -65,7 +62,7 @@ class Config:
         if not url:
             raise ValueError(
                 f"Grok API URL 未配置！\n"
-                f"请使用以下命令配置 MCP 服务器：\n{self._SETUP_COMMAND}"
+                f"请使用以下命令配置环境变量：\n{self._SETUP_COMMAND}"
             )
         return url
 
@@ -75,7 +72,7 @@ class Config:
         if not key:
             raise ValueError(
                 f"Grok API Key 未配置！\n"
-                f"请使用以下命令配置 MCP 服务器：\n{self._SETUP_COMMAND}"
+                f"请使用以下命令配置环境变量：\n{self._SETUP_COMMAND}"
             )
         return key
 

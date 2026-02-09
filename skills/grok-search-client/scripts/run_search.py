@@ -1,5 +1,20 @@
 import argparse
 import asyncio
+import sys
+from pathlib import Path
+
+def find_project_root(start: Path) -> Path | None:
+    for candidate in [start, *start.parents]:
+        if (candidate / "pyproject.toml").is_file():
+            return candidate
+    return None
+
+
+PROJECT_ROOT = find_project_root(Path(__file__).resolve())
+if PROJECT_ROOT:
+    SRC_PATH = PROJECT_ROOT / "src"
+    if SRC_PATH.is_dir() and str(SRC_PATH) not in sys.path:
+        sys.path.insert(0, str(SRC_PATH))
 
 from grok_search import search
 

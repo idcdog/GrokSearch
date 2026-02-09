@@ -5,10 +5,7 @@ from pathlib import Path
 class Config:
     _instance = None
     _SETUP_COMMAND = (
-        'claude mcp add-json grok-search --scope user '
-        '\'{"type":"stdio","command":"uvx","args":["--from",'
-        '"git+https://github.com/GuDaStudio/GrokSearch","grok-search"],'
-        '"env":{"GROK_API_URL":"your-api-url","GROK_API_KEY":"your-api-key"}}\''
+        "export GROK_API_URL=\"your-api-url\" && export GROK_API_KEY=\"your-api-key\""
     )
     _DEFAULT_MODEL = "grok-4-fast"
 
@@ -63,9 +60,14 @@ class Config:
     def grok_api_url(self) -> str:
         url = os.getenv("GROK_API_URL")
         if not url:
+            config_data = self._load_config_file()
+            url = config_data.get("api_url")
+        if not url:
             raise ValueError(
-                f"Grok API URL 未配置！\n"
-                f"请使用以下命令配置 MCP 服务器：\n{self._SETUP_COMMAND}"
+                "Grok API URL 未配置！\n"
+                "请使用环境变量或配置文件设置：\n"
+                f"环境变量示例：{self._SETUP_COMMAND}\n"
+                f"配置文件：{self.config_file}"
             )
         return url
 
@@ -73,9 +75,14 @@ class Config:
     def grok_api_key(self) -> str:
         key = os.getenv("GROK_API_KEY")
         if not key:
+            config_data = self._load_config_file()
+            key = config_data.get("api_key")
+        if not key:
             raise ValueError(
-                f"Grok API Key 未配置！\n"
-                f"请使用以下命令配置 MCP 服务器：\n{self._SETUP_COMMAND}"
+                "Grok API Key 未配置！\n"
+                "请使用环境变量或配置文件设置：\n"
+                f"环境变量示例：{self._SETUP_COMMAND}\n"
+                f"配置文件：{self.config_file}"
             )
         return key
 

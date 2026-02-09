@@ -41,18 +41,20 @@ pip install git+https://github.com/GuDaStudio/GrokSearch
 
 ## 配置
 
-设置环境变量（必须）：
+优先使用环境变量（优先级高于配置文件）：
 
 ```bash
 export GROK_API_URL="https://your-api-endpoint.com/v1"
 export GROK_API_KEY="your-api-key-here"
 ```
 
-可选：配置默认模型（持久化到 `~/.config/grok-search/config.json`）：
+可选：在配置文件中设置 API 与默认模型（`~/.config/grok-search/config.json`）：
 
 ```json
 {
-  "model": "grok-2-latest"
+  "api_url": "https://your-api-endpoint.com/v1",
+  "api_key": "your-api-key-here",
+  "model": "grok-4-fast"
 }
 ```
 

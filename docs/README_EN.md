@@ -41,18 +41,20 @@ pip install git+https://github.com/GuDaStudio/GrokSearch
 
 ## Configuration
 
-Set required environment variables:
+Set environment variables first (they override config file values):
 
 ```bash
 export GROK_API_URL="https://your-api-endpoint.com/v1"
 export GROK_API_KEY="your-api-key-here"
 ```
 
-Optional default model (persisted to `~/.config/grok-search/config.json`):
+Optional: set API credentials and default model in `~/.config/grok-search/config.json`:
 
 ```json
 {
-  "model": "grok-2-latest"
+  "api_url": "https://your-api-endpoint.com/v1",
+  "api_key": "your-api-key-here",
+  "model": "grok-4-fast"
 }
 ```
 
